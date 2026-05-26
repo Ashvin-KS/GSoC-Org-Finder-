@@ -2711,7 +2711,7 @@ sections.forEach(sectionId => {
 
       this.render();
       this.renderModal();
-      if (typeof renderOrgs === 'function') renderOrgs(false);
+      if (typeof renderOrgs === 'function') renderOrgs(true);
     },
 
     render() {
@@ -2824,6 +2824,12 @@ sections.forEach(sectionId => {
       `;
     }
   };
+
+  // Legacy globals mapping for compatibility with app.js and other external callers
+  window.toggleCompare = (name, e) => CompareManager.toggle(name, e);
+  window.handleCompareSlotChange = (slotIndex, selectEl) => CompareManager.handleSlotChange(slotIndex, selectEl);
+  window.renderCompare = () => CompareManager.render();
+  window.renderCompareModal = () => CompareManager.renderModal();
 
   // Set up delegated event listeners for UI interactions
   document.addEventListener('DOMContentLoaded', () => {
