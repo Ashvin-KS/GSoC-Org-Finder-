@@ -2770,12 +2770,6 @@ sections.forEach(sectionId => {
     renderModal() {
       const body = document.getElementById('compareModalBody');
       if (!body) return;
-      const escapeHtmlHelper = (value) => String(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
 
       const slotIndices = Array.from({length: this.maxSlots}, (_, i) => i);
       const slots = slotIndices.map(i => ORGS.find(o => o.name === this.list[i]) || null);
@@ -2814,7 +2808,7 @@ sections.forEach(sectionId => {
                 <td class="py-3 px-4 font-bold text-zinc-500">${label}</td>
                 ${slots.map(org => `
                   <td class="py-3 px-4 text-zinc-700 dark:text-zinc-300">
-                    ${org ? escapeHtmlHelper(getValue(org)) : '<span class="text-zinc-300 dark:text-zinc-600">-</span>'}
+                    ${org ? escapeHtml(getValue(org)) : '<span class="text-zinc-300 dark:text-zinc-600">-</span>'}
                   </td>
                 `).join('')}
               </tr>
